@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "./Daily.css"
 
 export default class Current extends Component {
   render = () => {
@@ -20,8 +21,8 @@ export default class Current extends Component {
   showHourlyForecast = () => {
     if (this.props.daily && !this.props.daily.message) {
       return (
-        <div key="dailyDiv">
-          <h2 className="weather">15 Day Forecast</h2>
+        <div className="daily" key="dailyDiv">
+          <h2 className="daily-h2">15 Day Forecast</h2>
           <ul key="dailyul" className="dailyList">
             {this.props.daily.map((day, i) => {
               return (

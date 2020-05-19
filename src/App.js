@@ -16,6 +16,16 @@ export default class App extends Component {
     }
   }
 
+  render = () => {
+    return (
+      <div className="App">
+        <Search />
+        <h1 className="city">{this.state.city}</h1>
+        <DisplayWeather weather={this.state.weather} hourly={this.state.hourly} daily={this.state.daily}/>
+      </div>
+    );
+  }
+
   componentDidMount = async () => { 
     const latlng = await this.getLatLng();
     await this.getWeather(latlng);
@@ -37,7 +47,11 @@ export default class App extends Component {
     }
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
-    this.setState({ weather: data });
+    if (!data.message) {
+      this.setState({ weather: data });
+    } else { 
+      this.setState({ weather: {MYerror: "Could not get weather data... Most likely too many requests, climacell is down for some reason, or a problem with your internet"}});
+    }
   }
 
   getHourlyForecast = async (latlng) => {
@@ -53,7 +67,11 @@ export default class App extends Component {
     }
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
-    this.setState({ hourly: data });
+    if (!data.message) {
+      this.setState({ hourly: data });
+    } else { 
+      this.setState({ weather: {MYerror: "Could not get weather data... Most likely too many requests, climacell is down for some reason, or a problem with your internet"}});
+    }
   }
 
   getDailyForecast = async (latlng) => {
@@ -70,7 +88,11 @@ export default class App extends Component {
     }
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
-    this.setState({ daily: data });
+    if (!data.message) {
+      this.setState({ daily: data });
+    } else { 
+      this.setState({ weather: {MYerror: "Could not get weather data... Most likely too many requests, climacell is down for some reason, or a problem with your internet"}});
+    }
   }
 
   getLatLng = async () => { 
@@ -86,15 +108,5 @@ export default class App extends Component {
     const latlng = data.results[0].locations[0].displayLatLng
     // console.log(latlng);
     return latlng;
-  }
-  
-  render = () => {
-    return (
-      <div className="App">
-        <Search />
-        <h1 className="city">{this.state.city}</h1>
-        <DisplayWeather weather={this.state.weather} hourly={this.state.hourly} daily={this.state.daily}/>
-      </div>
-    );
   }
 }

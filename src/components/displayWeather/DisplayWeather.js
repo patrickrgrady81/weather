@@ -10,14 +10,21 @@ export default class DisplayWeather extends Component {
     // if (this.props.hourly) {
     //   console.log(this.props.hourly[0]);
     // }
-
-    return (
-      <div key="outerdiv">
-        <Daily daily={this.props.daily} getDate={this.getDate} getTime={this.getTime}/>
-        <Current weather={this.props.weather} getDate={this.getDate} getTime={this.getTime}/>
-        <Hourly hourly={this.props.hourly} getDate={this.getDate} getTime={this.getTime} />
-      </div>
-    )
+    if (this.props.weather) {
+      if (this.props.weather.MYerror) {
+        return (
+          <h1>{this.props.weather.MYerror}</h1>
+        )
+      }
+    } else {
+      return (
+        <div key="outerdiv" className="outerDiv">
+          <Daily daily={this.props.daily} getDate={this.getDate} getTime={this.getTime} />
+          <Current weather={this.props.weather} getDate={this.getDate} getTime={this.getTime} />
+          <Hourly hourly={this.props.hourly} getDate={this.getDate} getTime={this.getTime} />
+        </div>
+      )
+    }
   }
   
   getDate = (date) => { 

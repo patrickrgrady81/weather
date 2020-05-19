@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "./Current.css"
 
 export default class Current extends Component {
   render = () => {
@@ -20,9 +21,9 @@ export default class Current extends Component {
   showCurrentWeather = () => {
     if (this.props.weather && !this.props.weather.message) {
       return (
-        <div key="currentWeatherDiv" className="weather">
+        <div key="currentWeatherDiv" className="current">
           <h1 key="ch11">{!this.props.weather ? "Getting Current Weather Conditions" : ""}</h1>
-          <h2 key="ch12">Weather for {this.props.getDate(new Date())} at {this.props.weather ?
+          <h2 className="current-h2" key="ch12">Weather for {this.props.getDate(new Date())} at {this.props.weather ?
             `${this.props.getTime(this.props.weather.observation_time.value)}` : ""}</h2>
           <ul key="currentul" className="currentWeatherList">
             <li key={"curli0"}><h3 key="ch21">{this.props.weather ?

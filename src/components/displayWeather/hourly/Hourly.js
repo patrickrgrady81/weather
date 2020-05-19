@@ -20,8 +20,8 @@ export default class Hourly extends Component {
   showHourlyForecast = () => {
     if (this.props.hourly && !this.props.hourly.message) {
       return (
-        <div key="hourlydiv" className="weather">
-          <h2 key="hourlyh2">Hourly Forecast</h2>
+        <div key="hourlydiv" className="hourly">
+          <h2 className="hourly-h2" key="hourlyh2">Hourly Forecast</h2>
           <ul key="hourlyul" className="hourlyList">
             {this.props.hourly.map((hour, i) => {
               return (
