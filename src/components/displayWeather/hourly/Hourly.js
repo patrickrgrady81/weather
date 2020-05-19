@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "./Hourly.css"
 
 export default class Hourly extends Component { 
   render = () => { 
@@ -20,9 +21,9 @@ export default class Hourly extends Component {
   showHourlyForecast = () => {
     if (this.props.hourly && !this.props.hourly.message) {
       return (
-        <div key="hourlydiv" className="hourly">
+        <div className="hourly" key="hourlydiv">
           <h2 className="hourly-h2" key="hourlyh2">Hourly Forecast</h2>
-          <ul key="hourlyul" className="hourlyList">
+          <ul className="hourlyList" key="hourlyul">
             {this.props.hourly.map((hour, i) => {
               return (
                 <div key={`lihourdiv${i}`}>

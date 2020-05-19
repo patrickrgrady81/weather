@@ -15,14 +15,18 @@ export default class DisplayWeather extends Component {
         return (
           <h1>{this.props.weather.MYerror}</h1>
         )
+      } else {
+        return (
+          <div key="outerdiv" className="outerDiv">
+            <Daily daily={this.props.daily} getDate={this.getDate} getTime={this.getTime} />
+            <Current weather={this.props.weather} getDate={this.getDate} getTime={this.getTime} />
+            <Hourly hourly={this.props.hourly} getDate={this.getDate} getTime={this.getTime} />
+          </div>
+        )
       }
-    } else {
+    } else { 
       return (
-        <div key="outerdiv" className="outerDiv">
-          <Daily daily={this.props.daily} getDate={this.getDate} getTime={this.getTime} />
-          <Current weather={this.props.weather} getDate={this.getDate} getTime={this.getTime} />
-          <Hourly hourly={this.props.hourly} getDate={this.getDate} getTime={this.getTime} />
-        </div>
+        "Connection Error!"
       )
     }
   }

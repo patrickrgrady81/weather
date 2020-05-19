@@ -23,8 +23,6 @@ export default class Current extends Component {
       return (
         <div key="currentWeatherDiv" className="current">
           <h1 key="ch11">{!this.props.weather ? "Getting Current Weather Conditions" : ""}</h1>
-          <h2 className="current-h2" key="ch12">Weather for {this.props.getDate(new Date())} at {this.props.weather ?
-            `${this.props.getTime(this.props.weather.observation_time.value)}` : ""}</h2>
           <ul key="currentul" className="currentWeatherList">
             <li key={"curli0"}><h3 key="ch21">{this.props.weather ?
               `${this.props.weather.weather_code.value.toUpperCase().replace("_", " ")}` : ""}</h3></li>
@@ -42,6 +40,8 @@ export default class Current extends Component {
             <li key="curli8">{this.props.weather ? `Sunrise: ${this.getSunrise()}` : ""}</li>
             <li key="curli9">{this.props.weather ? `Sunset: ${this.getSunset()}` : ""}</li>
           </ul>
+          <h2 className="current-h2" key="ch12">(last updated: {this.props.getDate(new Date())} at {this.props.weather ?
+            `${this.props.getTime(this.props.weather.observation_time.value)})` : ""}</h2>
         </div>
       )
     }

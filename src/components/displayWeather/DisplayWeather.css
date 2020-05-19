@@ -5,6 +5,7 @@
 
 .currentWeatherList, .hourlyList, .dailyList {
   list-style-type: none;
+  padding: 0;
 }
 
 .currentWeatherList li{
@@ -17,4 +18,7 @@
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  background-color: #0029FA;
+  color: white;
+  margin: 0;
 }
