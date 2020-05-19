@@ -10,7 +10,9 @@ export default class App extends Component {
 
     this.state = {
       city: "Pottstown, PA",
-      weather: {}
+      weather: null,
+      hourly: null,
+      daily: null
     }
   }
 
@@ -18,14 +20,16 @@ export default class App extends Component {
     const latlng = await this.getLatLng();
     await this.getWeather(latlng);
     await this.getHourlyForecast(latlng);
+    await this.getDailyForecast(latlng);
   }
 
   getWeather = async (latlng) => {
 
     const key = process.env.REACT_APP_CLIMACELL
+    const us = "us";
     const more = `precipitation,precipitation_type,sunrise,sunset,visibility,cloud_cover,weather_code`
     const fields = `temp,feels_like,wind_speed,dewpoint,humidity,wind_direction,baro_pressure,${more}`
-    const query = `lat=${latlng.lat}&lon=${latlng.lng}&unit_system=us&apikey=${key}&fields=${fields}`
+    const query = `lat=${latlng.lat}&lon=${latlng.lng}&unit_system=${us}&apikey=${key}&fields=${fields}`
     const url = `https://api.climacell.co/v3/weather/realtime?${query}`
     const fetchInfo = {
       "method": "GET",
@@ -33,7 +37,6 @@ export default class App extends Component {
     }
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
-    // console.log(data);
     this.setState({ weather: data });
   }
 
@@ -43,15 +46,31 @@ export default class App extends Component {
     const us = "us"
     const fields = "precipitation_type,precipitation,temp,weather_code"
     const query = `lat=${latlng.lat}&lon=${latlng.lng}&unit_system=${us}&apikey=${key}&fields=${fields}&start_time=now`
-    const url = `https://api.climacell.co/v3/weather/nowcast?${query}`
+    const url = `https://api.climacell.co/v3/weather/forecast/hourly?${query}`
     const fetchInfo = {
       "method": "GET",
       "headers": {}
     }
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
-    console.log(data);
     this.setState({ hourly: data });
+  }
+
+  getDailyForecast = async (latlng) => {
+
+    const key = process.env.REACT_APP_CLIMACELL
+    const us = "us"
+    const fields = `temp,precipitation,weather_code`
+    const query = `lat=${latlng.lat}&lon=${latlng.lng}&unit_system=${us}&start_time=now&apikey=${key}&fields=${fields}`
+    const url = `https://api.climacell.co/v3/weather/forecast/daily?${query}`
+
+    const fetchInfo = {
+      "method": "GET",
+      "headers": {}
+    }
+    const response = await fetch(url, fetchInfo);
+    const data = await response.json();
+    this.setState({ daily: data });
   }
 
   getLatLng = async () => { 
@@ -74,7 +93,7 @@ export default class App extends Component {
       <div className="App">
         <Search />
         <h1 className="city">{this.state.city}</h1>
-        <DisplayWeather weather={this.state.weather}/>
+        <DisplayWeather weather={this.state.weather} hourly={this.state.hourly} daily={this.state.daily}/>
       </div>
     );
   }

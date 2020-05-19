@@ -2,3 +2,15 @@
   margin: 1rem;
   /* text-align: center; */
 }
+
+.currentWeatherList, .hourlyList, .dailyList {
+  list-style-type: none;
+}
+
+.currentWeatherList li{
+  margin-bottom: 0.6rem;
+}
+
+.outerdiv {
+
+}
