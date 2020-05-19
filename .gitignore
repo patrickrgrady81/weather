@@ -1,4 +1,5 @@
 .env
+/pg
 
 # dependencies
 /node_modules

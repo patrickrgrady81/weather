@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './App.css';
+import './components/displayWeather/DisplayWeather.css';
 import Search from "./components/search/Search"
 import DisplayWeather from './components/displayWeather/DisplayWeather';
 
@@ -8,28 +9,49 @@ export default class App extends Component {
     super();
 
     this.state = {
+      city: "Pottstown, PA",
       weather: {}
     }
   }
 
   componentDidMount = async () => { 
     const latlng = await this.getLatLng();
-    this.getWeather(latlng);
+    await this.getWeather(latlng);
+    await this.getHourlyForecast(latlng);
   }
 
-  getWeather = async (latlng) => { 
-    const key = process.env.REACT_APP_WEATHER;
-    var url = `https://api.openweathermap.org/data/2.5/weather?lat=${latlng.lat}&lon=${latlng.lng}&appid=${key}&units=imperial`;
+  getWeather = async (latlng) => {
 
+    const key = process.env.REACT_APP_CLIMACELL
+    const more = `precipitation,precipitation_type,sunrise,sunset,visibility,cloud_cover,weather_code`
+    const fields = `temp,feels_like,wind_speed,dewpoint,humidity,wind_direction,baro_pressure,${more}`
+    const query = `lat=${latlng.lat}&lon=${latlng.lng}&unit_system=us&apikey=${key}&fields=${fields}`
+    const url = `https://api.climacell.co/v3/weather/realtime?${query}`
     const fetchInfo = {
       "method": "GET",
       "headers": {}
     }
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
-    // console.log(data.weather[0].description);
-    this.setState({weather: data});
+    // console.log(data);
+    this.setState({ weather: data });
+  }
 
+  getHourlyForecast = async (latlng) => {
+
+    const key = process.env.REACT_APP_CLIMACELL
+    const us = "us"
+    const fields = "precipitation_type,precipitation,temp,weather_code"
+    const query = `lat=${latlng.lat}&lon=${latlng.lng}&unit_system=${us}&apikey=${key}&fields=${fields}&start_time=now`
+    const url = `https://api.climacell.co/v3/weather/nowcast?${query}`
+    const fetchInfo = {
+      "method": "GET",
+      "headers": {}
+    }
+    const response = await fetch(url, fetchInfo);
+    const data = await response.json();
+    console.log(data);
+    this.setState({ hourly: data });
   }
 
   getLatLng = async () => { 
@@ -51,6 +73,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <Search />
+        <h1 className="city">{this.state.city}</h1>
         <DisplayWeather weather={this.state.weather}/>
       </div>
     );
