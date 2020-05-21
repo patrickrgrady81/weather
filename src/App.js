@@ -10,7 +10,7 @@ export default class App extends Component {
     super();
 
     this.state = {
-      city: "Pottstown, PA",
+      city: "Philadelphia, PA",
       weather: null,
       hourly: null,
       daily: null, 
