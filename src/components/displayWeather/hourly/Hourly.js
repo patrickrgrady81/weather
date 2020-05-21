@@ -22,13 +22,12 @@ export default class Hourly extends Component {
     if (this.props.hourly && !this.props.hourly.message) {
       return (
         <div className="hourly" key="hourlydiv">
-          <h2 className="hourly-h2" key="hourlyh2">Hourly Forecast</h2>
+          <h2 className="hourly-h2" key="hourlyh2">12 Hour Forecast</h2>
           <ul className="hourlyList" key="hourlyul">
-            {this.props.hourly.map((hour, i) => {
+            {this.props.hourly.slice(0,12).map((hour, i) => {
               return (
                 <div key={`lihourdiv${i}`}>
-                  <h3 key={`h2${i}`}>{`${this.props.getTime(hour.observation_time.value)} 
-                        ${this.props.getDate(new Date(hour.observation_time.value))}`}</h3>
+                  <h3 key={`h2${i}`}>{`${this.getTime(hour.observation_time.value)} `}</h3>
                   <li key={`cond${i}`}>{`Conditions: ${hour.weather_code.value.toLowerCase().replace("_", " ")}`}</li>
                   <li key={`temp${i}`}>{`Temperature: ${hour.temp.value}\u00B0${hour.temp.units}`}</li>
                   <li key={`prec${i}`}>{`Precipitation: ${hour.precipitation_type.value.toLowerCase().replace("_", " ")} 
@@ -44,5 +43,18 @@ export default class Hourly extends Component {
         <h2 key="get">Getting Hourly Forcast Data...</h2>
       )
     }
+  }
+
+  getTime = (time) => { 
+    time = new Date(time);
+    let hrs = time.getHours();
+    const postfix = hrs >= 12 ? "PM" : "AM"; 
+    hrs = hrs > 12 ? hrs - 12 : hrs;
+    hrs = hrs === 0 ? 12 : hrs
+
+    const mins = time.getMinutes();
+    const showMins = (mins < 10) ? `0${mins}` : `${mins}`;
+
+    return `${hrs}:${showMins} ${postfix}`;
   }
 }

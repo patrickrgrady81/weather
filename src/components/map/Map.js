@@ -7,7 +7,7 @@ export default class Map extends Component {
       // console.log(this.props.map);
       return (
         <div className="mapDiv">
-          <img width="300" height="200" src={this.props.map } alt="your town" className="map"></img>
+          <img width="600" height="300" src={this.props.map } alt="your town" className="map"></img>
         </div>
       );
     } else { 

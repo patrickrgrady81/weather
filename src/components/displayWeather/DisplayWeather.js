@@ -18,9 +18,9 @@ export default class DisplayWeather extends Component {
       } else {
         return (
           <div key="outerdiv" className="outerDiv">
-            <Daily daily={this.props.daily} getDate={this.getDate} getTime={this.getTime} />
+            <Hourly hourly={this.props.hourly}/>
             <Current weather={this.props.weather} getDate={this.getDate} getTime={this.getTime} />
-            <Hourly hourly={this.props.hourly} getDate={this.getDate} getTime={this.getTime} />
+            <Daily daily={this.props.daily} />
           </div>
         )
       }

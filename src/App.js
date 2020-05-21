@@ -21,19 +21,23 @@ export default class App extends Component {
   render = () => {
     return (
       <div className="App">
-        <Search setCity={this.setCity}/>
+        <Search setCity={this.setCity} />
         <h1 className="city">{this.state.city}</h1>
         <Map map={this.state.map}/>
-        <DisplayWeather weather={this.state.weather} hourly={this.state.hourly} daily={this.state.daily}/>
+        <DisplayWeather city={this.state.city} weather={this.state.weather} hourly={this.state.hourly} daily={this.state.daily}/>
       </div>
     );
   }
 
-  componentDidMount = async () => { 
+  run = async () => { 
     const latlng = await this.getLatLng();
     await this.getWeather(latlng);
     await this.getHourlyForecast(latlng);
     await this.getDailyForecast(latlng);
+  }
+
+  componentDidMount = () => { 
+    this.run();
   }
 
   getWeather = async (latlng) => {
@@ -105,14 +109,21 @@ export default class App extends Component {
     }
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
+    this.setState({city: `${data.results[0].locations[0].adminArea5}, ${data.results[0].locations[0].adminArea3}` });
     const latlng = data.results[0].locations[0].displayLatLng
-    const map = data.results[0].locations[0].mapUrl;
-    this.setState({map});
-    // console.log(latlng);
+    await this.getMap(latlng);
+
     return latlng;
   }
 
-  setCity = (city) => { 
-    this.setState({city});
+  getMap = async (latlng) => { 
+    const map = `https://www.mapquestapi.com/staticmap/v4/getplacemap?key=EtyXXVE9Ky0eBwniVcww2Zlu8DmFmc7F&location=${latlng.lat},${latlng.lng}&size=600,300&type=map&zoom=11&imagetype=png&scalebar=false&traffic=flow`;
+
+    this.setState({map});
+  }
+
+  setCity = async (newCity) => { 
+    await this.setState({ city: newCity });
+    this.run();
   }
 }

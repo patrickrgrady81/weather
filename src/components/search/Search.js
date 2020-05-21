@@ -24,6 +24,7 @@ export default class Search extends Component {
   }
 
   clicker = (e) => { 
+    e.preventDefault();
     this.props.setCity(this.state.searchValue);
   }
 }
