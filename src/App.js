@@ -4,6 +4,7 @@ import './components/displayWeather/DisplayWeather.css';
 import Search from "./components/search/Search"
 import DisplayWeather from './components/displayWeather/DisplayWeather';
 import Map from './components/map/Map';
+import Nav from './components/nav/Nav';
 
 export default class App extends Component {
   constructor() { 
@@ -20,12 +21,13 @@ export default class App extends Component {
 
   render = () => {
     return (
-      <div className="App">
+      <>
+        <Nav />
         <Search setCity={this.setCity} />
         <h1 className="city">{this.state.city}</h1>
         <Map map={this.state.map}/>
         <DisplayWeather city={this.state.city} weather={this.state.weather} hourly={this.state.hourly} daily={this.state.daily}/>
-      </div>
+      </>
     );
   }
 

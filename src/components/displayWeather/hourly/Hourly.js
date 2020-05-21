@@ -24,7 +24,7 @@ export default class Hourly extends Component {
         <div className="hourly" key="hourlydiv">
           <h2 className="hourly-h2" key="hourlyh2">12 Hour Forecast</h2>
           <ul className="hourlyList" key="hourlyul">
-            {this.props.hourly.slice(0,12).map((hour, i) => {
+            {this.props.hourly.slice(1,13).map((hour, i) => {
               return (
                 <div key={`lihourdiv${i}`}>
                   <h3 key={`h2${i}`}>{`${this.getTime(hour.observation_time.value)} `}</h3>

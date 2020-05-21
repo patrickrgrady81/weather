@@ -3,7 +3,9 @@
   font-size: 0.9rem;
   background-color: #5C73F2;
   color: white;
-  margin-left: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  margin-right: 2rem;
 }
 
 .daily-h2 {
