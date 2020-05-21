@@ -117,7 +117,8 @@ export default class App extends Component {
   }
 
   getMap = async (latlng) => { 
-    const map = `https://www.mapquestapi.com/staticmap/v4/getplacemap?key=EtyXXVE9Ky0eBwniVcww2Zlu8DmFmc7F&location=${latlng.lat},${latlng.lng}&size=600,300&type=map&zoom=11&imagetype=png&scalebar=false&traffic=flow`;
+    const key = process.env.REACT_APP_MAPQUEST;
+    const map = `https://www.mapquestapi.com/staticmap/v4/getplacemap?key=${key}&location=${latlng.lat},${latlng.lng}&size=600,300&type=map&zoom=11&imagetype=png&scalebar=false&traffic=flow`;
 
     this.setState({map});
   }

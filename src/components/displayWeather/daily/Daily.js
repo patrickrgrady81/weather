@@ -13,18 +13,18 @@ export default class Current extends Component {
 
     return (
       <div>
-        {this.showHourlyForecast()}
+        {this.showDailyForecast()}
       </div>
     )
   }
 
-  showHourlyForecast = () => {
+  showDailyForecast = () => {
     if (this.props.daily && !this.props.daily.message) {
       return (
         <div className="daily" key="dailyDiv">
           <h2 className="daily-h2">10 Day Forecast</h2>
           <ul className="dailyList" key="dailyul">
-            {this.props.daily.slice(1,11).map((day, i) => {
+            {this.props.daily.slice(2,12).map((day, i) => {
               return (
                 <div key={`dailyDiv${i}`}>
                 <h3 key={`date${i}`}>{this.getDay(new Date(day.observation_time.value))}</h3>
