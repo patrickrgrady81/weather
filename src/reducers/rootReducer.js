@@ -1,5 +1,5 @@
 const initialState = {
-  city: "Orlando, FL",
+  city: "Philadelphia, PA",
   weather: null,
   hourly: null,
   daily: null, 

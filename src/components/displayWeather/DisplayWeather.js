@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Current from "./current/Current";
 import Hourly from "./hourly/Hourly";
 import Daily from "./daily/Daily";
-import { connect } from 'react-redux';
+import './DisplayWeather.css';
 
 
 class DisplayWeather extends Component {

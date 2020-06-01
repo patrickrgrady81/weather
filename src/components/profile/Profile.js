@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
+import Nav from '../nav/Nav';
 import "./Profile.css"
 
 export default class Profile extends Component {
   render = () => {
     return (
-      <>
-        <h1>This is your profile page. Here you can edit your settings for your exact needs</h1>
-      </>
+      <div className="settings">
+        <Nav />
+        <h1>Welcome</h1>
+        {/* username */}
+        {/* what default City? */}
+        {/* Show Current? */}
+        {/* Show 12 Hour? */}
+        {/* Show 10 Day? */}
+      </div>
     )
   }
 }

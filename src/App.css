@@ -1,6 +1,19 @@
-.city {
-  border-bottom: 2px solid white;
+.app-city {
   text-align: center;
   color:white;
-  padding-bottom: 1rem;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center;
+}
+
+.app-search, .app-city, .app-map {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import "./Search.css"
 import { connect } from 'react-redux';
+import "./Search.css"
 
 class Search extends Component { 
   constructor(props) { 

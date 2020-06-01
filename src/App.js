@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import './App.css';
-import './components/displayWeather/DisplayWeather.css';
-import Search from "./components/search/Search"
-import DisplayWeather from './components/displayWeather/DisplayWeather';
-import Map from './components/map/Map';
-import Nav from './components/nav/Nav';
 import { connect } from 'react-redux';
+import Nav from './components/nav/Nav';
+import Search from "./components/search/Search"
+import Map from './components/map/Map';
+import DisplayWeather from './components/displayWeather/DisplayWeather';
+import './App.css';
 
 class App extends Component {
 
@@ -13,9 +12,11 @@ class App extends Component {
     return (
       <>
         <Nav />
-        <Search run={this.run} />
-        <h1 className="city">{this.props.city}</h1>
-        <Map map={this.props.map}/>
+        <div className="app-container">
+          <Search className="app-search" run={this.run} />
+          <h1 className="app-city">{this.props.city}</h1>
+          <Map className="app-map" map={this.props.map} />
+        </div>
         <DisplayWeather/>
       </>
     );
