@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import "./Daily.css"
 
-export default class Current extends Component {
+class Daily extends Component {
   render = () => {
     if (this.props.daily && this.props.daily.message) {
       console.log(this.props.hourly.message);
@@ -62,3 +63,11 @@ export default class Current extends Component {
     }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    daily: state.daily
+  };
+}
+
+export default connect(mapStateToProps)(Daily);

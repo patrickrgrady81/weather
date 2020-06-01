@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import "./Search.css"
+import { connect } from 'react-redux';
 
-export default class Search extends Component { 
+class Search extends Component { 
   constructor(props) { 
     super(props);
     this.state = {
       searchValue: ""
     }
+    // console.log(props);
   }
   
   render = () => {
@@ -25,6 +27,21 @@ export default class Search extends Component {
 
   clicker = (e) => { 
     e.preventDefault();
-    this.props.setCity(this.state.searchValue);
+    this.props.updateCity(this.state.searchValue);
+    // this.props.run();
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    city: state.city
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateCity: (city) => dispatch({ type: 'UPDATE_CITY', city })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

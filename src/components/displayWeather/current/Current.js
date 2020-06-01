@@ -1,21 +1,46 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import "./Current.css"
 
-export default class Current extends Component {
+
+class Current extends Component {
   render = () => {
     if (this.props.weather && this.props.weather.message) {
       console.log(this.props.weather.message);
     } else if (this.props.weather && !this.props.weather.message) {
       // console.log(this.props.weather);
-    } else { 
+    } else {
       // console.log("Getting data...");
     }
 
     return (
-    <div>
-      {this.showCurrentWeather()}
-    </div>
-  )}
+      <div>
+        {this.showCurrentWeather()}
+      </div>
+    )
+  }
+
+  getDate = (date) => {
+    return date.toLocaleDateString("en-US")
+  }
+
+  getTime = (tim) => {
+    if (this.props.weather.temp) {
+      const timeNow = new Date(tim);
+      let hrs = timeNow.getHours();
+      const postfix = hrs >= 12 ? "PM" : "AM";
+      hrs = hrs > 12 ? hrs - 12 : hrs;
+      hrs = hrs === 0 ? 12 : hrs
+
+      const mins = timeNow.getMinutes();
+      const showMins = (mins < 10) ? `0${mins}` : `${mins}`;
+
+      const secs = timeNow.getSeconds();
+      const showSecs = (secs < 10) ? `0${secs}` : `${secs}`;
+
+      return `${hrs}:${showMins}:${showSecs} ${postfix}`;
+    }
+  }
 
 
   showCurrentWeather = () => {
@@ -40,12 +65,14 @@ export default class Current extends Component {
             <li key="curli8">{this.props.weather ? `Sunrise: ${this.getSunrise()}` : ""}</li>
             <li key="curli9">{this.props.weather ? `Sunset: ${this.getSunset()}` : ""}</li>
           </ul>
-          <h2 className="current-h2" key="ch12">(last updated: {this.props.getDate(new Date())} at {this.props.weather ?
-            `${this.props.getTime(this.props.weather.observation_time.value)})` : ""}</h2>
+          <h2 className="current-h2" key="ch12">(last updated: {this.getDate(new Date())} at {this.props.weather ?
+            `${this.getTime(this.props.weather.observation_time.value)})` : ""}</h2>
         </div>
       )
     }
   }
+
+
 
   getRain = () => {
     const type = this.props.weather.precipitation_type.value;
@@ -60,13 +87,13 @@ export default class Current extends Component {
 
   getSunrise = () => {
     if (this.props.weather.sunrise) {
-      return this.props.getTime(this.props.weather.sunrise.value)
+      return this.getTime(this.props.weather.sunrise.value)
     }
   }
 
   getSunset = () => {
     if (this.props.weather.sunset) {
-      return this.props.getTime(this.props.weather.sunset.value)
+      return this.getTime(this.props.weather.sunset.value)
     }
   }
 
@@ -83,3 +110,11 @@ export default class Current extends Component {
     }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    weather: state.weather
+  };
+}
+
+export default connect(mapStateToProps)(Current);

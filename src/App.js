@@ -5,30 +5,30 @@ import Search from "./components/search/Search"
 import DisplayWeather from './components/displayWeather/DisplayWeather';
 import Map from './components/map/Map';
 import Nav from './components/nav/Nav';
+import { connect } from 'react-redux';
 
-export default class App extends Component {
-  constructor() { 
-    super();
-
-    this.state = {
-      city: "Philadelphia, PA",
-      weather: null,
-      hourly: null,
-      daily: null, 
-      map: null
-    }
-  }
+class App extends Component {
 
   render = () => {
     return (
       <>
         <Nav />
-        <Search setCity={this.setCity} />
-        <h1 className="city">{this.state.city}</h1>
-        <Map map={this.state.map}/>
-        <DisplayWeather city={this.state.city} weather={this.state.weather} hourly={this.state.hourly} daily={this.state.daily}/>
+        <Search run={this.run} />
+        <h1 className="city">{this.props.city}</h1>
+        <Map map={this.props.map}/>
+        <DisplayWeather/>
       </>
     );
+  }
+
+  componentDidMount = () => { 
+    this.run()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.city !== this.props.city) {
+      this.run();
+    }
   }
 
   run = async () => { 
@@ -36,10 +36,6 @@ export default class App extends Component {
     await this.getWeather(latlng);
     await this.getHourlyForecast(latlng);
     await this.getDailyForecast(latlng);
-  }
-
-  componentDidMount = () => { 
-    this.run();
   }
 
   getWeather = async (latlng) => {
@@ -56,9 +52,7 @@ export default class App extends Component {
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
     if (!data.message) {
-      this.setState({ weather: data });
-    } else { 
-      this.setState({ weather: {MYerror: "Could not get weather data... Most likely too many requests, climacell is down for some reason, or a problem with your internet"}});
+      this.props.updateWeather(data);
     }
   }
 
@@ -75,10 +69,8 @@ export default class App extends Component {
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
     if (!data.message) {
-      this.setState({ hourly: data });
-    } else { 
-      this.setState({ weather: {MYerror: "Could not get weather data... Most likely too many requests, climacell is down for some reason, or a problem with your internet"}});
-    }
+      this.props.updateHourly(data);
+    } 
   }
 
   getDailyForecast = async (latlng) => {
@@ -95,14 +87,12 @@ export default class App extends Component {
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
     if (!data.message) {
-      this.setState({ daily: data });
-    } else { 
-      this.setState({ weather: {MYerror: "Could not get weather data... Most likely too many requests, climacell is down for some reason, or a problem with your internet"}});
-    }
+      this.props.updateDaily(data);
+    } 
   }
 
   getLatLng = async () => { 
-    const address = this.state.city;
+    const address = this.props.city;
     const key = process.env.REACT_APP_MAPQUEST;
     const url = `https://www.mapquestapi.com/geocoding/v1/address?key=${key}&inFormat=kvp&outFormat=json&location=${address}`;
     const fetchInfo = {
@@ -111,9 +101,11 @@ export default class App extends Component {
     }
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
-    this.setState({city: `${data.results[0].locations[0].adminArea5}, ${data.results[0].locations[0].adminArea3}` });
+    // this.setState({ city: `${data.results[0].locations[0].adminArea5}, ${data.results[0].locations[0].adminArea3}` });
+    // debugger
     const latlng = data.results[0].locations[0].displayLatLng
     await this.getMap(latlng);
+    this.props.updateCity(`${data.results[0].locations[0].adminArea5}, ${data.results[0].locations[0].adminArea3}`);
 
     return latlng;
   }
@@ -122,11 +114,28 @@ export default class App extends Component {
     const key = process.env.REACT_APP_MAPQUEST;
     const map = `https://www.mapquestapi.com/staticmap/v4/getplacemap?key=${key}&location=${latlng.lat},${latlng.lng}&size=600,300&type=map&zoom=11&imagetype=png&scalebar=false&traffic=flow`;
 
-    this.setState({map});
-  }
-
-  setCity = async (newCity) => { 
-    await this.setState({ city: newCity });
-    this.run();
+    this.props.updateMap(map);
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    city: state.city,
+    weather: state.weather,
+    hourly: state.hourly,
+    daily: state.daily, 
+    map: state.map
+  };
+}
+  
+const mapDispatchToProps = dispatch => {
+  return {
+    updateCity: (city) => dispatch({ type: 'UPDATE_CITY', city }),
+    updateMap: (map) => dispatch({ type: 'UPDATE_MAP', map }),
+    updateDaily: (daily) => dispatch({type: 'UPDATE_DAILY', daily}),
+    updateHourly: (hourly) => dispatch({type: 'UPDATE_HOURLY', hourly}),
+    updateWeather: (weather) => dispatch({type: 'UPDATE_WEATHER', weather})
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

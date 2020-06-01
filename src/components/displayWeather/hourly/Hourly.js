@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import "./Hourly.css"
 
-export default class Hourly extends Component { 
+class Hourly extends Component { 
   render = () => { 
     if (this.props.hourly && this.props.hourly.message) {
       console.log(this.props.hourly.message);
@@ -58,3 +59,11 @@ export default class Hourly extends Component {
     return `${hrs}:${showMins} ${postfix}`;
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    hourly: state.hourly
+  };
+}
+
+export default connect(mapStateToProps)(Hourly);
