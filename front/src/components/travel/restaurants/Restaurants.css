@@ -1,0 +1,41 @@
+img {
+  width: 30%;
+  margin: 1rem 0;
+}
+
+li {
+  list-style: none;
+  text-align: center;
+  margin-right: 40px;
+}
+
+ul  div {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+}
+
+.rest-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+}
+
+
+
+.rest-name {
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-left: 35px;
+}
+
+.rest-cat {
+  font-size: 1.5rem;
+}
+

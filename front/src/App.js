@@ -107,7 +107,7 @@ class App extends Component {
     }
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     const latlng = data.results[0].locations[0].displayLatLng
     await this.getMap(latlng);
     this.props.updateCity(`${data.results[0].locations[0].adminArea5}, ${data.results[0].locations[0].adminArea3}`);

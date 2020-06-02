@@ -26,3 +26,7 @@
     flex: 0 1 auto;
     align-self: auto;
 }
+
+#root > div.app-container > div.mapDiv > img {
+  width: 100%;
+}

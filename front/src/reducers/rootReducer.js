@@ -3,7 +3,8 @@ const initialState = {
   weather: null,
   hourly: null,
   daily: null, 
-  map: null
+  map: null,
+  restaurants: null,
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -26,6 +27,9 @@ const rootReducer = (state = initialState, action) => {
 
     case 'UPDATE_WEATHER':
       return Object.assign({}, state, { weather: action.weather });
+
+    case 'UPDATE_RESTAURANTS':
+      return Object.assign({}, state, { restaurants: action.restaurants });
  
     default:
       return state;
