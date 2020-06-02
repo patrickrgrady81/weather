@@ -1,0 +1,28 @@
+.app-city {
+  text-align: center;
+  color:white;
+  text-decoration: none;
+}
+
+.app-container a {
+  text-decoration: none;
+}
+
+.app-city:hover {
+  color: lightblue;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center;
+}
+
+.app-search, .app-city, .app-map {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+}

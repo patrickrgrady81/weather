@@ -1,0 +1,15 @@
+.hourly {
+  text-align: center;
+  font-size: 0.9rem;
+  background-color: #5C73F2;
+  color: white;
+  margin-left: 2rem;
+  padding-bottom: 1rem;
+}
+
+.hourly-h2 {
+  text-align: center;
+  padding: 1rem;
+  margin: 2rem;
+  border-bottom: 2px solid #230A59;
+}
