@@ -1,0 +1,50 @@
+nav {
+  border: 2px solid black;
+  color: white;
+  background-color: black;
+}
+
+.nav-city {
+  margin-right: 3rem;
+  margin-left: 1rem;
+}
+
+ul {
+  margin-top: 1.7rem;
+  padding-left: 6.5rem;
+}
+
+li {
+  list-style: none;
+}
+
+.nav-pages, nav, .nav-log {
+  display: flex;
+}
+
+.nav-input, .nav-btn {
+  height: 50%;
+  margin-top: 1.5rem;
+}
+
+.nav-input {
+  width: 10rem;
+  margin-right: 0.7rem;
+}
+
+nav > ul.nav-pages > li > a {
+  text-decoration: none;
+  color: white;
+  border: 1px solid white;
+  padding: 0.4rem;
+  border-radius: 10px;
+}
+
+nav > ul.nav-pages > li:hover, nav > ul.nav-pages > li > a:hover  {
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+}
+
+
+/* {#root > div:nth-child(1) > nav > ul.nav-pages > li:nth-child(3) > a} */

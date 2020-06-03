@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Nav from './components/nav/Nav';
-import Search from "./components/search/Search"
 import Map from './components/map/Map';
 import DisplayWeather from './components/displayWeather/DisplayWeather';
 import './App.css';
@@ -17,8 +16,8 @@ class App extends Component {
           {/* We can access any data that is then needed using redux. We should do this instead */}
           {/* of mixing the presentation here with the getting data functions. */}
           {/* That should make this a container component??? */}
-          <Search className="app-search" run={this.run} />
-          <a href="/travel"><h1 className="app-city">{this.props.city}</h1></a>
+          {/* <Search className="app-search" run={this.run} />
+          <a href="/travel"><h1 className="app-city">{this.props.city}</h1></a> */}
           <Map className="app-map" map={this.props.map} />
         </div>
         <DisplayWeather/>

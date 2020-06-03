@@ -34,7 +34,7 @@ class Restaurants extends Component {
       return (
         <>
           <Nav />
-          <h2>Loading Restaurants...</h2>
+          <h2>Loading Restaurants For {this.props.city}...</h2>
         </>
       )
     }
@@ -42,6 +42,12 @@ class Restaurants extends Component {
 
   componentDidMount = () => { 
     this.getRestaurants();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.city !== this.props.city) {
+      this.getRestaurants();
+    }
   }
 
   getRestaurants = async () => {

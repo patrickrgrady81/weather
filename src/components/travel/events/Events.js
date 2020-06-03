@@ -40,7 +40,7 @@ class Events extends Component {
       return (
         <>
           <Nav />  
-          <h2>Loading Events...</h2>
+          <h2>Loading Events For {this.props.city}...</h2>
         </>
       )
     }
@@ -48,6 +48,12 @@ class Events extends Component {
 
   componentDidMount = () => { 
     this.getEvents();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.city !== this.props.city) {
+      this.getEvents();
+    }
   }
   
   getEvents = async () => { 

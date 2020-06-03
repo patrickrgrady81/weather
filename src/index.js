@@ -23,7 +23,7 @@ ReactDOM.render(
         <Route exact path="/travel" component={Travel} />
         <Route exact path="/restaurants" component={Restaurants} />
         <Route exact path="/events" component={Events} />
-      </>,
+      </>
     </Router>
   </Provider>,
   document.getElementById('root')

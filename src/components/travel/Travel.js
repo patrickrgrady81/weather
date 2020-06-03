@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Nav from "../nav/Nav"
-import Search from "../search/Search"
 import './Travel.css';
 
 
@@ -11,8 +10,6 @@ class Travel extends Component {
     return (
       <>
         <Nav />
-        <Search />
-        <h1 className="travel-info">Information for {this.props.city}</h1>
       </>
     )
   }
