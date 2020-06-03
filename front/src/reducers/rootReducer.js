@@ -1,10 +1,11 @@
 const initialState = {
-  city: "Pottstown, PA",
+  city: "Philadelphia, PA",
   weather: null,
   hourly: null,
   daily: null, 
   map: null,
   restaurants: null,
+  events: null,
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -30,6 +31,9 @@ const rootReducer = (state = initialState, action) => {
 
     case 'UPDATE_RESTAURANTS':
       return Object.assign({}, state, { restaurants: action.restaurants });
+    
+    case 'UPDATE_EVENTS':
+      return Object.assign({}, state, { events: action.events });
  
     default:
       return state;

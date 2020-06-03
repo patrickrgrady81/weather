@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Nav from "../../nav/Nav"
 import './Restaurants.css';
 
 
@@ -9,6 +10,7 @@ class Restaurants extends Component {
     if (this.props.restaurants) {
       return (
         <div className="rest-wrapper">
+          <Nav />
           <h1>Top 10 Restaurants on Yelp</h1>
           <ul>
               {this.props.restaurants.map((rest, i) => {
@@ -30,16 +32,46 @@ class Restaurants extends Component {
       )
     } else { 
       return (
-        <h2>Loading Restaurants...</h2>
+        <>
+          <Nav />
+          <h2>Loading Restaurants...</h2>
+        </>
       )
     }
+  }
+
+  componentDidMount = () => { 
+    this.getRestaurants();
+  }
+
+  getRestaurants = async () => {
+    const fetchInfo = {
+      "method": "POST",
+      "headers": {
+        'Accept': 'application/json',       
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify({ city: this.props.city })
+    }
+    const url = "http://localhost:3001/api/v1/restaurants"
+    const response = await fetch(url, fetchInfo);
+    const data = await response.json();
+    // console.log(data);
+    this.props.updateRestaurants(data);
   }
 }
 
 const mapStateToProps = state => {
   return {
+    city: state.city,
     restaurants: state.restaurants
   };
 }
 
-export default connect(mapStateToProps)(Restaurants);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateEvents: (events) => dispatch({ type: 'UPDATE_EVENTS', events }),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Restaurants);

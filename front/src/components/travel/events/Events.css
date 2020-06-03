@@ -1,0 +1,17 @@
+.event-name {
+  text-align: center;
+}
+
+.event-wrapper {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+}
+
+.events-wrapper {
+  margin-bottom: 1rem;
+}
