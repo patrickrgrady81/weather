@@ -30,3 +30,7 @@
 #root > div.app-container > div.mapDiv > img {
   width: 100%;
 }
+
+li {
+  list-style: none;
+}

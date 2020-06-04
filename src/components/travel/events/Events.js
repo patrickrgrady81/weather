@@ -10,8 +10,9 @@ class Events extends Component {
     if (this.props.events) {
       if (this.props.events.length > 0) {
         return (
+          <>
+          <Nav />
           <div className="event-wrapper">
-            <Nav />
             <h1>Upcoming Events</h1>
             <ul>
               {this.props.events.map((e, i) => {
@@ -20,13 +21,13 @@ class Events extends Component {
                     <li key={`name${i}`} className="event-name">{e._embedded.events[0].name}</li>
                     <li key={`venue${i}`} className="event-name">{e._embedded.events[0]._embedded.venues[0].name}</li>
                     <li key={`class${i}`} className="event-name">{e._embedded.events[0].classifications[0].genre.name}</li>
-                    <li key={`date${i}`} className="event-name">{e._embedded.events[0].dates.start.localDate} at
-                                                              {e._embedded.events[0].dates.start.localTime}</li>
+                    <li key={`date${i}`} className="event-name">{e._embedded.events[0].dates.start.localDate} @ {e._embedded.events[0].dates.start.localTime}</li>
                   </div>
                 )
               })}
             </ul>
-          </div>
+            </div>
+          </>
         )
       } else { 
         return (

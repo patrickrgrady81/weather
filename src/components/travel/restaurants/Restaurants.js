@@ -9,10 +9,11 @@ class Restaurants extends Component {
   render = () => {
     if (this.props.restaurants) {
       return (
+        <>
+        <Nav />
         <div className="rest-wrapper">
-          <Nav />
           <h1>Top 10 Restaurants on Yelp</h1>
-          <ul>
+          <ul className="rest-div1">
               {this.props.restaurants.map((rest, i) => {
                 return (
                   <div key={`div${i}`}>
@@ -28,7 +29,8 @@ class Restaurants extends Component {
                 )
               })}
           </ul>
-        </div>
+          </div>
+        </>
       )
     } else { 
       return (
@@ -76,7 +78,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateEvents: (events) => dispatch({ type: 'UPDATE_EVENTS', events }),
+    updateRestaurants: (restaurants) => dispatch({ type: 'UPDATE_RESTAURANTS', restaurants }),
   };
 }
 

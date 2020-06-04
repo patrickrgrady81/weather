@@ -9,13 +9,14 @@ nav {
   margin-left: 1rem;
 }
 
-ul {
+nav ul {
   margin-top: 1.7rem;
   padding-left: 6.5rem;
 }
 
-li {
+nav li {
   list-style: none;
+  margin-left: 2rem;
 }
 
 .nav-pages, nav, .nav-log {
@@ -46,5 +47,3 @@ nav > ul.nav-pages > li:hover, nav > ul.nav-pages > li > a:hover  {
   border-radius: 10px;
 }
 
-
-/* {#root > div:nth-child(1) > nav > ul.nav-pages > li:nth-child(3) > a} */
