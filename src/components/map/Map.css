@@ -1,4 +1,6 @@
 .mapDiv {
   display: flex;
   justify-content: center;
+  margin-right: 12%;
+  margin-top: 2rem;
 }

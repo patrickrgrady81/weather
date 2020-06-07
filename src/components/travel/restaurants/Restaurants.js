@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { updateRestaurants } from "../../../actions/restaurants"
 import Nav from "../../nav/Nav"
 import './Restaurants.css';
 
@@ -43,29 +44,13 @@ class Restaurants extends Component {
   }
 
   componentDidMount = () => { 
-    this.getRestaurants();
+    this.props.updateRestaurants(this.props.city);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.city !== this.props.city) {
-      this.getRestaurants();
+      this.props.updateRestaurants(this.props.city);
     }
-  }
-
-  getRestaurants = async () => {
-    const fetchInfo = {
-      "method": "POST",
-      "headers": {
-        'Accept': 'application/json',       
-        'Content-Type': 'application/json', 
-      },
-      body: JSON.stringify({ city: this.props.city })
-    }
-    const url = "http://localhost:3001/api/v1/restaurants"
-    const response = await fetch(url, fetchInfo);
-    const data = await response.json();
-    // console.log(data);
-    this.props.updateRestaurants(data);
   }
 }
 
@@ -78,7 +63,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateRestaurants: (restaurants) => dispatch({ type: 'UPDATE_RESTAURANTS', restaurants }),
+    updateRestaurants: (city) => dispatch(updateRestaurants(city)),
   };
 }
 
