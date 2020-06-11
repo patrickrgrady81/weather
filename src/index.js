@@ -26,7 +26,7 @@ ReactDOM.render(
         <Route exact path="/weather"> 
           <App />
         </Route>
-        <Route exact path="/profile"> 
+        <Route exact path="/profile/:email"> 
           <Profile />
         </Route>
         <Route exact path="/restaurants"> 
