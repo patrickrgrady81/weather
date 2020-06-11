@@ -6,7 +6,7 @@ export default class Map extends Component {
     if (this.props.map) {
       // console.log(this.props.map);
       return (
-        <div className="mapDiv">
+        <div className="map-div">
           <img width="600" height="300" src={this.props.map } alt="your town" className="map"></img>
         </div>
       );

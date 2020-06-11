@@ -1,6 +1,6 @@
-.mapDiv {
-  display: flex;
-  justify-content: center;
-  margin-right: 12%;
+.map-div {
+  text-align: center;
   margin-top: 2rem;
+  width: 150%;
+  height: 150%;
 }

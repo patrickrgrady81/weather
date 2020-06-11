@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateRestaurants } from "../../../actions/restaurants"
+import { getLatLng } from "../../../actions/getLatLng"
 import Nav from "../../nav/Nav"
 import './Restaurants.css';
 
@@ -13,14 +14,14 @@ class Restaurants extends Component {
         <>
         <Nav />
         <div className="rest-wrapper">
-          <h1>Top 10 Restaurants on Yelp</h1>
-          <ul className="rest-div1">
+          <h1 className="rest-head">Restaurants To Try</h1>
+          <ul className="rest-list">
               {this.props.restaurants.map((rest, i) => {
                 return (
-                  <div key={`div${i}`}>
+                  <div className="rest-container" key={`div${i}`}>
                     <li key={`name${i}`} className="rest-name">{rest.name}</li>
-                    <img key={`img${i}`} src={`${rest.image_url}`} alt={`${rest.name}`}></img>
-                    <ul>
+                    <img className="rest-img" key={`img${i}`} src={`${rest.image_url}`} alt={`${rest.name}`}></img>
+                    <ul className="rest-info">
                       <li key={`cat${i}`} className="rest-cat">{rest.categories[0].title}</li>  
                       <li key={`phone${i}`}>{rest.display_phone}</li>  
                       <li key={`address${i}`}>{`${rest.location.address1}`}</li>  
@@ -49,6 +50,7 @@ class Restaurants extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.city !== this.props.city) {
+      this.props.getLatLng(this.props.city);
       this.props.updateRestaurants(this.props.city);
     }
   }
@@ -63,6 +65,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    getLatLng: (city) => dispatch(getLatLng(city)),
     updateRestaurants: (city) => dispatch(updateRestaurants(city)),
   };
 }
