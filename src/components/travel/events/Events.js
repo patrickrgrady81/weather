@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateEvents } from "../../../actions/events"
+import { getLatLng } from "../../../actions/getLatLng"
 import Nav from "../../nav/Nav"
 import './Events.css';
 
@@ -14,7 +15,7 @@ class Events extends Component {
           <>
             <Nav />
             <div className="event-wrapper">
-              <h1>Upcoming Events</h1>
+              <h1>Upcoming Events in {this.props.city}</h1>
               <ul>
                 {this.props.events.map((e, i) => {
                   return (
@@ -42,7 +43,7 @@ class Events extends Component {
       return (
         <>
           <Nav />
-          <h2>Loading Events For {this.props.city}...</h2>
+          <h2>Loading Events in {this.props.city}...</h2>
         </>
       )
     }
@@ -54,6 +55,7 @@ class Events extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.city !== this.props.city) {
+      this.props.getLatLng(this.props.city);
       this.props.updateEvents(this.props.city);
     }
   }
@@ -68,6 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    getLatLng: (city) => dispatch(getLatLng(city)),
     updateEvents: (city) => dispatch(updateEvents(city)),
   };
 }

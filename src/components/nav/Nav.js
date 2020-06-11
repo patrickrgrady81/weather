@@ -15,8 +15,11 @@ class Nav extends Component {
       <div>
         <nav>
           <h2 className="nav-city">{this.props.city}</h2>
-          <input className="nav-input" type="text" placeholder="Search City" onChange={this.changer} value={this.state.searchValue}></input>
-          <button className="nav-btn" onClick={this.clicker}>Go</button>
+          <form className="nav-form" onSubmit={this.go}>
+            <input className="nav-input" type="text" placeholder="Search City"
+                   onChange={this.changer} value={this.state.searchValue}></input>
+            <button className="nav-btn" onClick={this.go}>Go</button>
+          </form>
           <ul className="nav-pages">
             <li><a href="/weather">Weather</a></li>
             <li><a href="/restaurants">Restaurants</a></li>
@@ -34,14 +37,14 @@ class Nav extends Component {
     if (this.props.loggedIn === false) { 
       return (
         <>
-          <li>Sign Up</li>
-          <li>Log In</li>
+          <li><a href="/signup">Sign Up</a></li>
+          <li><a href="/login">Log In</a></li>
         </>
       )
     } else {
       return (
         <>
-          <li>UserName</li>
+          <li><a href="/profile">{this.props.email}</a></li>
         </>
       )
     }
@@ -51,7 +54,7 @@ class Nav extends Component {
     this.setState({searchValue: e.target.value});
   }
 
-  clicker = (e) => { 
+  go = (e) => { 
     e.preventDefault();
     this.props.updateCity(this.state.searchValue);
     // this.props.run();
@@ -61,7 +64,8 @@ class Nav extends Component {
 const mapStateToProps = state => { 
   return {
     loggedIn: state.loggedIn,
-    city: state.city
+    city: state.city,
+    email: state.email
   };
 }
 

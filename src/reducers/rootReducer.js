@@ -6,7 +6,8 @@ const initialState = {
   map: null,
   restaurants: null,
   events: null,
-  loggedIn: true,
+  loggedIn: false,
+  email: null
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -35,6 +36,9 @@ const rootReducer = (state = initialState, action) => {
     
     case 'UPDATE_EVENTS':
       return {...state, events: action.events };
+
+    case 'LOGIN':
+      return {...state, loggedIn: true, email: action.email };
  
     default:
       return state;

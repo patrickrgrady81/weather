@@ -14,7 +14,7 @@ class Restaurants extends Component {
         <>
         <Nav />
         <div className="rest-wrapper">
-          <h1 className="rest-head">Restaurants To Try</h1>
+            <h1 className="rest-head">Highly Rated Restaurants in {this.props.city}</h1>
           <ul className="rest-list">
               {this.props.restaurants.map((rest, i) => {
                 return (
@@ -38,20 +38,20 @@ class Restaurants extends Component {
       return (
         <>
           <Nav />
-          <h2>Loading Restaurants For {this.props.city}...</h2>
+          <h2>Loading Restaurants in {this.props.city}...</h2>
         </>
       )
     }
   }
 
-  componentDidMount = () => { 
-    this.props.updateRestaurants(this.props.city);
+  componentDidMount = async () => { 
+    await this.props.updateRestaurants(this.props.city);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate = async (prevProps) => {
     if (prevProps.city !== this.props.city) {
-      this.props.getLatLng(this.props.city);
-      this.props.updateRestaurants(this.props.city);
+      await this.props.getLatLng(this.props.city);
+      await this.props.updateRestaurants(this.props.city);
     }
   }
 }

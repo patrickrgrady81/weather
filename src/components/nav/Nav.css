@@ -9,6 +9,11 @@ nav {
   margin-left: 1rem;
 }
 
+.nav-log li a {
+  text-decoration: none;
+  color: white;
+}
+
 nav ul {
   margin-top: 1.7rem;
   padding-left: 6.5rem;
@@ -35,6 +40,10 @@ nav li {
   margin-top: 1.5rem;
 }
 
+.nav-form {
+  height: 50%;
+}
+
 .nav-input {
   width: 10rem;
   margin-right: 0.7rem;
@@ -46,10 +55,10 @@ nav li {
 .nav-pages {
   flex-grow: 0;     /* do not grow   - initial value: 0 */
   flex-shrink: 0;   /* do not shrink - initial value: 1 */
-  flex-basis: 35%; /* width/height  - initial value: auto */
+  flex-basis: 25%; /* width/height  - initial value: auto */
 }
 
-nav > ul.nav-pages > li > a {
+nav > ul.nav-pages > li > a, nav > ul.nav-log > li > a {
   text-decoration: none;
   color: white;
   border: 1px solid white;
@@ -57,7 +66,8 @@ nav > ul.nav-pages > li > a {
   border-radius: 10px;
 }
 
-nav > ul.nav-pages > li:hover, nav > ul.nav-pages > li > a:hover  {
+nav > ul.nav-pages > li:hover, nav > ul.nav-pages > li > a:hover,
+nav > ul.nav-log > li:hover, nav > ul.nav-log > li > a:hover  {
   color: black;
   background-color: white;
   border-radius: 10px;
