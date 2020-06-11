@@ -45,7 +45,7 @@ class Nav extends Component {
     } else {
       return (
         <>
-          <li><Link to="/profile">{this.props.email}</Link></li>
+          <li><Link to={`/profile/${this.props.email}`}>{this.props.email}</Link></li>
         </>
       )
     }

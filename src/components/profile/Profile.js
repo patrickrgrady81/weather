@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Nav from '../nav/Nav';
-import "./Profile.css"
+import "./Profile.css";
 
 class Profile extends Component {
   render = () => {
     return (
       <div className="settings">
         <Nav />
-        <h1>Welcome</h1> {/* username */}
+        <h1>Welcome {`${this.props.email}`}</h1> {/* username */}
         
         {/* what default City? */}
         {/* Show Current? */}
@@ -18,4 +19,18 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+
+const mapStateToProps = state => { 
+  return {
+    loggedIn: state.loggedIn,
+    email: state.email
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateCity: (city) => dispatch({ type: 'UPDATE_CITY', city })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
