@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import {connect} from 'react-redux'
 import "./Nav.css"
 
@@ -21,9 +22,9 @@ class Nav extends Component {
             <button className="nav-btn" onClick={this.go}>Go</button>
           </form>
           <ul className="nav-pages">
-            <li><a href="/weather">Weather</a></li>
-            <li><a href="/restaurants">Restaurants</a></li>
-            <li><a href="/events">Events</a></li>
+            <li><Link to="/weather">Weather</Link></li>
+            <li><Link to="/restaurants">Restaurants</Link></li>
+            <li><Link to="/events">Events</Link></li>
           </ul >
           <ul className="nav-log">
             {this.getLog()}
@@ -37,14 +38,14 @@ class Nav extends Component {
     if (this.props.loggedIn === false) { 
       return (
         <>
-          <li><a href="/signup">Sign Up</a></li>
-          <li><a href="/login">Log In</a></li>
+          <li><Link to="/signup">Sign Up</Link></li>
+          <li><Link to="/login">Log In</Link></li>
         </>
       )
     } else {
       return (
         <>
-          <li><a href="/profile">{this.props.email}</a></li>
+          <li><Link to="/profile">{this.props.email}</Link></li>
         </>
       )
     }
