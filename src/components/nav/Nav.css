@@ -21,6 +21,13 @@ nav li {
 
 .nav-pages, nav, .nav-log {
   display: flex;
+
+}
+
+.nav-city {
+  flex-grow: 0;     /* do not grow   - initial value: 0 */
+  flex-shrink: 0;   /* do not shrink - initial value: 1 */
+  flex-basis: 15%; /* width/height  - initial value: auto */
 }
 
 .nav-input, .nav-btn {
@@ -31,6 +38,15 @@ nav li {
 .nav-input {
   width: 10rem;
   margin-right: 0.7rem;
+  flex-grow: 0;     /* do not grow   - initial value: 0 */
+  flex-shrink: 0;   /* do not shrink - initial value: 1 */
+  flex-basis: 15%; /* width/height  - initial value: auto */
+}
+
+.nav-pages {
+  flex-grow: 0;     /* do not grow   - initial value: 0 */
+  flex-shrink: 0;   /* do not shrink - initial value: 1 */
+  flex-basis: 35%; /* width/height  - initial value: auto */
 }
 
 nav > ul.nav-pages > li > a {

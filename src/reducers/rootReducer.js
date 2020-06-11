@@ -6,7 +6,7 @@ const initialState = {
   map: null,
   restaurants: null,
   events: null,
-  loggedIn: false,
+  loggedIn: true,
 }
 
 const rootReducer = (state = initialState, action) => {
