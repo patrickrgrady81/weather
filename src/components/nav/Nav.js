@@ -58,10 +58,7 @@ class Nav extends Component {
 
   go = (e) => { 
     e.preventDefault();
-    console.log('a')
     this.props.getLatLng(this.state.searchValue);
-    console.log('g')
-    // this.props.run();
   }
 }
 
