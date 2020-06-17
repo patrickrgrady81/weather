@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import { getLatLng } from '../../actions/getLatLng'
 import "./Nav.css"
 
 class Nav extends Component {
@@ -57,7 +58,9 @@ class Nav extends Component {
 
   go = (e) => { 
     e.preventDefault();
-    this.props.updateCity(this.state.searchValue);
+    console.log('a')
+    this.props.getLatLng(this.state.searchValue);
+    console.log('g')
     // this.props.run();
   }
 }
@@ -72,7 +75,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateCity: (city) => dispatch({ type: 'UPDATE_CITY', city })
+    getLatLng: (city) => dispatch(getLatLng(city))
   };
 };
 
