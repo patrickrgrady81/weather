@@ -1,5 +1,6 @@
 export const updateRestaurants = (city) => { 
   return async (dispatch) => {
+    dispatch({type: "START_LOADING"})
     const fetchInfo = {
       "method": "POST",
       "headers": {
@@ -11,6 +12,7 @@ export const updateRestaurants = (city) => {
     const url = "http://localhost:3001/api/v1/restaurants"
     const response = await fetch(url, fetchInfo);
     const data = await response.json();
+    dispatch({ type: 'LOADING_SUCCESS' });
     dispatch({ type: 'UPDATE_RESTAURANTS', restaurants: data });
   }
 }

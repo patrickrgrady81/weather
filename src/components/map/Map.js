@@ -1,19 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 import "./Map.css"
 
-export default class Map extends Component { 
-  render = () => {
-    if (this.props.map) {
-      // console.log(this.props.map);
-      return (
-        <div className="map-div">
-          <img width="600" height="300" src={this.props.map } alt="your town" className="map"></img>
-        </div>
-      );
-    } else { 
-      return (
-        <h2>Can't display map</h2>
-      )
-    }
+const Map = (props) => { 
+  if (props.map) {
+    return (
+      <div className="map-div">
+        <img width="600" height="300" src={props.map } alt="your town" className="map"></img>
+      </div>
+    );
+  } else { 
+    return (
+      <h2>Can't display map</h2>
+    )
   }
 }
+
+const mapStateToProps = ({ map }) => { 
+  return {
+    map
+  }
+}
+
+export default connect(mapStateToProps)(Map);

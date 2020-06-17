@@ -7,7 +7,8 @@ const initialState = {
   restaurants: null,
   events: null,
   loggedIn: false,
-  email: null
+  email: null,
+  loading: 'idle'
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -39,7 +40,12 @@ const rootReducer = (state = initialState, action) => {
 
     case 'LOGIN':
       return {...state, loggedIn: true, email: action.email };
- 
+    case 'START_LOADING':
+      return { ...state, loading: 'pending' }
+    case 'LOADING_SUCCESS':
+      return { ...state, loading: 'success' }
+    case 'LOADING_FAILURE':
+      return {...state, loading: 'failure' }
     default:
       return state;
   }

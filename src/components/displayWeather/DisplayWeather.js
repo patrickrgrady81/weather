@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Current from "./current/Current";
 import Hourly from "./hourly/Hourly";
@@ -6,10 +6,8 @@ import Daily from "./daily/Daily";
 import './DisplayWeather.css';
 
 
-class DisplayWeather extends Component {
-
-  render = () => {
-    if (this.props.weather) {
+const DisplayWeather = (props) => {
+    if (props.weather) {
       return (
         <div key="outerdiv" className="outerDiv">
           <Hourly />
@@ -22,7 +20,6 @@ class DisplayWeather extends Component {
         "Connection Error!"
       )
     }
-  }
 }
 
 const mapStateToProps = state => {

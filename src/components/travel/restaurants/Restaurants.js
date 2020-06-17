@@ -16,7 +16,7 @@ class Restaurants extends Component {
         <div className="rest-wrapper">
             <h1 className="rest-head">Highly Rated Restaurants in {this.props.city}</h1>
           <ul className="rest-list">
-              {this.props.restaurants.map((rest, i) => {
+              {this.props.loading === "success" ? this.props.restaurants.map((rest, i) => {
                 return (
                   <div className="rest-container" key={`div${i}`}>
                     <li key={`name${i}`} className="rest-name">{rest.name}</li>
@@ -29,7 +29,7 @@ class Restaurants extends Component {
                     </ul>
                   </div>
                 )
-              })}
+              }) : "Loading..."}
           </ul>
           </div>
         </>
@@ -56,10 +56,11 @@ class Restaurants extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({city, restaurants, loading}) => {
   return {
-    city: state.city,
-    restaurants: state.restaurants
+    city,
+    restaurants,
+    loading
   };
 }
 

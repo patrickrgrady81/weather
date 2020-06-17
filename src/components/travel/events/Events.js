@@ -17,7 +17,7 @@ class Events extends Component {
             <div className="event-wrapper">
               <h1>Upcoming Events in {this.props.city}</h1>
               <ul>
-                {this.props.events.map((e, i) => {
+                { this.props.loading === "success" ? this.props.events.map((e, i) => {
                   return (
                     <div key={`div${i}`} className="events-wrapper">
                       <li key={`name${i}`} className="event-name">{e._embedded.events[0].name}</li>
@@ -26,7 +26,7 @@ class Events extends Component {
                       <li key={`date${i}`} className="event-name">{e._embedded.events[0].dates.start.localDate} @ {e._embedded.events[0].dates.start.localTime}</li>
                     </div>
                   )
-                })}
+                }) : "Loading..."}
               </ul>
             </div>
           </>
@@ -61,10 +61,11 @@ class Events extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({city, events, loading}) => {
   return {
-    city: state.city,
-    events: state.events
+    city,
+    events,
+    loading
   };
 }
 
