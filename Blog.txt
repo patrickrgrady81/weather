@@ -3,3 +3,19 @@ In my final project at Flatiron Bootcamp, I made a React app. When I first start
 Before I learned React, when I would build front end web pages there was a lot of HTML and CSS involved getting things working and looking just the way you want them to. This is sometimes a very difficult thing to do because browsers are different and take different code to render the same page. Also, there was a major chore of having to work directly with the Document Object Model (DOM) by manipulating it with Javascript. You would have to take information based on the current DOM and get what other information you need and update the DOM accordingly. Luckily for us, along came React. Yes, you still need to know HTML, CSS, and Javascript but it takes all the hassle out for you. Now React takes certain states of the application and allows you to create individual components and have those components be able to see the state at any given time. When any state is updated, the component that uses the state will automagically update. This takes the tediousness of DOM manipulation and allows a developer to just have to deal with how they want things to look and how they will "react" with each other.
 
 Another great thing about React is that whether you are more into an object-oriented style or a functional style, you can learn to work with React. I choose an object-oriented approach in most cases when programming but I learned a lot about functional programming when learning React. The most important thing about functional programming is that everything is immutable, meaning, no data can be changed. This is especially important when using Redux in your React apps. When using Redux, you can save the state throughout your whole app and expose only the data needed by each component. When changing state, you cannot directly change it, but instead, you create a copy of it and tell Redux what part of your data you want to change. This is a core principle of functional programming. It is often fun to learn new paradigms when programming by learning new technologies. One big way to do this if you are an experienced OOP developer is to learn the ins and outs of React and Redux.
+
+Some of the hardest things to get used to in React is handling your events:
+  handleChange = (e) => { 
+    e.preventDefault();
+    this.setState({ search: e.target.value });
+  }
+
+  handleForm = async (e) => {
+    e.preventDefault();
+    if (this.state.search === "") return
+    let localSearchedEvents = [];
+      ..some crazy lookups here
+    this.setState({ searched: true, searchedEvents: localSearchedEvents });
+  }
+
+  so in React you have SyntheticEvents which means they are close to normal Javascript events. But React takes the wheel. One thing that you have to do is handle all events yourself. That being said, it may seem easy, but for example a textbox doesn't just change itself like it would in vanilla html. You need to create a state that watches it, then pass it to a handler, in this case handleChange. This will take place whenever the form is submitted whether you click the button or press enter. That is why handleChange has to set the state and then handleForm can read from that state.
