@@ -26,9 +26,6 @@ class Events extends Component {
             <div className="event-wrapper">
               <h1>Upcoming Events in {this.props.city}</h1>
               <form onSubmit={this.handleForm}>
-                <input onChange={this.handleChange} type="text" name="search" value={this.state.value} placeholder="Search for event">
-
-                </input>
                 <button>Go</button>
               </form>
               <ul>
